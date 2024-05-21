@@ -5,7 +5,8 @@ import java.net.MulticastSocket;
 
 public class Main {
     //A nivå
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)
+            throws IOException {
 
         // Default port number we are going to use
         int portnumber = 1234;
@@ -30,11 +31,38 @@ public class Main {
             serverMulticastCocket.receive(data);
             String msg = new String(data.getData()).trim();
 
-            System.out.println("Message received from client = " + msg);
+            System.out.println(readMsg(msg));
         }
         serverMulticastCocket.close();
+
     }
-    public void readMsg(String msg){
-        int calculate =
+    public static String readMsg(String msg){
+
+        if (msg.indexOf("*") > 0){
+            int sum1 = Integer.valueOf(msg.substring(0,msg.indexOf("*")));
+            int sum2 = Integer.valueOf(msg.substring(msg.indexOf("*")+1,msg.length()));
+
+            return sum1 +" * "+ sum2+" = " + sum1*sum2;
+        }
+        if (msg.indexOf("/") > 0){
+            int sum1 = Integer.valueOf(msg.substring(0,msg.indexOf("/")));
+            int sum2 = Integer.valueOf(msg.substring(msg.indexOf("/")+1,msg.length()));
+
+            return sum1 +" / "+ sum2+" = " + sum1/sum2;
+        }
+        if (msg.indexOf("+") > 0){
+            int sum1 = Integer.valueOf(msg.substring(0,msg.indexOf("+")));
+            int sum2 = Integer.valueOf(msg.substring(msg.indexOf("+")+1,msg.length()));
+
+            return sum1 +" + "+ sum2+" = " + (sum1+sum2);
+        }
+
+        if (msg.indexOf("-") > 0){
+            int sum1 = Integer.valueOf(msg.substring(0,msg.indexOf("-")));
+            int sum2 = Integer.valueOf(msg.substring(msg.indexOf("-")+1,msg.length()));
+
+            return sum1 +" - "+ sum2+" = " + (sum1-sum2);
+        }
+        return "0";
     }
 }
