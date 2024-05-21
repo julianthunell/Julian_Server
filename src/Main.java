@@ -29,8 +29,12 @@ public class Main {
             DatagramPacket data = new DatagramPacket(buf, buf.length);
             serverMulticastCocket.receive(data);
             String msg = new String(data.getData()).trim();
+
             System.out.println("Message received from client = " + msg);
         }
         serverMulticastCocket.close();
+    }
+    public void readMsg(String msg){
+        int calculate =
     }
 }
