@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 
 public class Main {
+    //A nivå
     public static void main(String[] args) throws IOException {
 
         // Default port number we are going to use
